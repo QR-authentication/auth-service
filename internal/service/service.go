@@ -25,7 +25,7 @@ func New(DBRepo DBRepo, authSigningKey string) *Service {
 }
 
 func (s *Service) Login(_ context.Context, in *authproto.LoginIn) (*authproto.LoginOut, error) {
-	exists, err := s.repository.UserExists(in.CardNumber)
+	exists, err := s.repository.UserExists(in.Login)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to check user existence: %v", err)
 	}
@@ -37,7 +37,7 @@ func (s *Service) Login(_ context.Context, in *authproto.LoginIn) (*authproto.Lo
 		}, nil
 	}
 
-	user, err := s.repository.GetUserByCardNumber(in.CardNumber)
+	user, err := s.repository.GetUserData(in.Login)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get user data: %v", err)
 	}

@@ -49,7 +49,7 @@ func (r *Repository) UserExists(cardNumber string) (bool, error) {
 	return exists, nil
 }
 
-func (r *Repository) GetUserByCardNumber(cardNumber string) (*model.User, error) {
+func (r *Repository) GetUserData(cardNumber string) (*model.User, error) {
 	var user model.User
 
 	query := `
