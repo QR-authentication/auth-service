@@ -31,10 +31,7 @@ func (s *Service) Login(_ context.Context, in *authproto.LoginIn) (*authproto.Lo
 	}
 
 	if !exists {
-		return &authproto.LoginOut{
-			Token:       "",
-			LoginStatus: false,
-		}, nil
+		return &authproto.LoginOut{Token: ""}, status.Errorf(codes.NotFound, "failed to user not found")
 	}
 
 	user, err := s.repository.GetUserData(in.Login)
@@ -43,10 +40,7 @@ func (s *Service) Login(_ context.Context, in *authproto.LoginIn) (*authproto.Lo
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(in.Password)); err != nil {
-		return &authproto.LoginOut{
-			Token:       "",
-			LoginStatus: false,
-		}, nil
+		return &authproto.LoginOut{Token: ""}, status.Error(codes.PermissionDenied, "failed to wrong password")
 	}
 
 	claims := &jwt.RegisteredClaims{
@@ -61,8 +55,5 @@ func (s *Service) Login(_ context.Context, in *authproto.LoginIn) (*authproto.Lo
 		return nil, status.Errorf(codes.Internal, "failed to generate token: %v", err)
 	}
 
-	return &authproto.LoginOut{
-		Token:       tokenString,
-		LoginStatus: true,
-	}, nil
+	return &authproto.LoginOut{Token: tokenString}, nil
 }
