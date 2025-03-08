@@ -5,13 +5,15 @@ import (
 	"log"
 	"net"
 
+	"google.golang.org/grpc"
+
 	authproto "github.com/QR-authentication/auth-proto/auth-proto"
+	metrics_lib "github.com/QR-authentication/metrics-lib"
+
 	"github.com/QR-authentication/auth-service/internal/config"
 	"github.com/QR-authentication/auth-service/internal/infra"
 	"github.com/QR-authentication/auth-service/internal/repository/postgres"
 	"github.com/QR-authentication/auth-service/internal/service"
-	metrics_lib "github.com/QR-authentication/metrics-lib"
-	"google.golang.org/grpc"
 )
 
 func main() {

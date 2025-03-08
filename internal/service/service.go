@@ -4,11 +4,12 @@ import (
 	"context"
 	"time"
 
-	authproto "github.com/QR-authentication/auth-proto/auth-proto"
 	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	authproto "github.com/QR-authentication/auth-proto/auth-proto"
 )
 
 type Service struct {

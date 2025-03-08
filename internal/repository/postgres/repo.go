@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/QR-authentication/auth-service/internal/config"
-	"github.com/QR-authentication/auth-service/internal/model"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq" // Импорт драйвера PostgreSQL
+
+	"github.com/QR-authentication/auth-service/internal/config"
+	"github.com/QR-authentication/auth-service/internal/model"
 )
 
 type Repository struct {
