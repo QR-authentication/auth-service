@@ -54,7 +54,7 @@ func (r *Repository) GetUserData(cardNumber string) (*model.User, error) {
 	var user model.User
 
 	query := `
-		SELECT id, card_number, name, surname, password
+		SELECT id, name, surname, patronymic, department, group_number, card_number, password, created_at
 		FROM users
 		WHERE card_number = $1`
 
